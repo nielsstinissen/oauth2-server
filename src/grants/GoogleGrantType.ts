@@ -58,7 +58,7 @@ export abstract class GoogleGrantType extends DefaultGrantType {
       scope: options.scopes,
       hd: options.hd ?? '*',
       login_hint: options.loginHint,
-      response_type: 'CODE',
+      response_type: 'code',
       code_challenge_method: CodeChallengeMethod.S256,
       code_challenge: pkce.challenge,
       redirect_uri: this.redirectUri,
