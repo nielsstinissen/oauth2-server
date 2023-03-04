@@ -8,3 +8,5 @@ export { Request, Response } from '@node-oauth/oauth2-server'
 export { OAuth2Server }
 
 export { AzureADGrantType } from './grants/AzureADGrantType'
+
+export { GoogleGrantType } from './grants/GoogleGrantType'

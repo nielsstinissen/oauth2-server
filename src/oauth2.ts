@@ -4,6 +4,7 @@ import { Client, OAuth2ServerOptions, Token } from './types'
 import { generateAuthorizationCodeModel } from './AuthorizationCodeModel'
 import { AnonymousGrantType } from './grants/AnonymousGrantType'
 import { BurgerProfielGrantType } from './grants/BurgerProfielGrantType'
+import { GoogleGrantType } from './grants/GoogleGrantType'
 
 export function createOAuth2 (options: OAuth2ServerOptions): OAuth2Server {
   const codeModel = generateAuthorizationCodeModel(options.services.codeService)
@@ -101,6 +102,24 @@ export function createOAuth2 (options: OAuth2ServerOptions): OAuth2Server {
     )
 
     serverOptions.extendedGrantTypes.ad = AzureADGrantType
+  }
+
+  if (options?.integrations?.google != null) {
+    if (options.services.pkceService == null) {
+      throw new Error('PKCE service is required for Google integration')
+    }
+
+    if (options.services.userService.findGoogleUser == null) {
+      throw new Error('User service must implement findGoogleUser for Google integration')
+    }
+
+    GoogleGrantType.configure(
+      options.integrations.google,
+      options.services.pkceService,
+      options.services.userService
+    )
+
+    serverOptions.extendedGrantTypes.google = GoogleGrantType
   }
 
   if (options.integrations?.anonymous != null) {

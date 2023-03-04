@@ -75,6 +75,7 @@ export interface OAuth2ServerOptions {
   }
   integrations?: {
     ad?: AzureADConfig
+    google?: GoogleConfig
     anonymous?: boolean
     burgerProfiel?: IBurgerProfielConfig
   }

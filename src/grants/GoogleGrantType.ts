@@ -12,8 +12,8 @@ export abstract class GoogleGrantType extends DefaultGrantType {
 
   public static configure (
     config: GoogleConfig,
-    userService: UserService,
-    pkceService: PKCEService
+    pkceService: PKCEService,
+    userService: UserService
   ): void {
     this.redirectUri = config.redirectUri
     this.pkceService = pkceService
